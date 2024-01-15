@@ -7,6 +7,9 @@ To kick things off, I set up the server and configured the essential environment
 On the frontend side, I integrated Angular CLI with Node.js, establishing a connection. With this foundation, I then designe and implemented diverse pages such as the homepage, product management, raw material handling, production processes, and supplier interactions. The overall design incorporated a blend of gray, green, and white tones for a polished look.
 The final stages involved linking the backend with the frontend, configuring Angular services for optimal API communication, and conducting thorough testing. Addressing minor issues, incorporating design enhancements, and optimizing the code in line with best practices were crucial steps. The result was a fully functional web application that taught me alot about full-stack development.
 
+### Running the Project
+After opening the project, execute 'npm install' in the terminal. Once dependencies are installed, run 'npm start' for Node and 'ng serve' for Angular. Find the database script in the folder and refer to the .env file for configuration details.
+
 
 
 
