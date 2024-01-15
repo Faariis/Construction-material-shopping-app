@@ -1,0 +1,115 @@
+create table korisnik(
+    id int primary key AUTO_INCREMENT,
+    ime varchar(250),
+    prezime varchar(250),
+    email_adresa varchar(250),
+    password varchar(250),
+    uloga varchar(100),
+    broj_telefona varchar(250),
+    adresa nvarchar(50),
+    status varchar(20),
+    UNIQUE (email_adresa)
+);
+
+insert into korisnik(ime, prezime, email_adresa, password, uloga, broj_telefona, adresa, status)
+ values('Faris', 'Trtak', 'emailadresa4@mail.com', '123456789', 'zaposlenik', '063123456', '123put', 'true');
+
+
+create table kategorije(
+    id int NOT NULL AUTO_INCREMENT,
+    naziv varchar(255) NOT NULL,
+    primary key(id)
+);
+
+
+CREATE TABLE dobavljaci (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naziv VARCHAR(255) NOT NULL,
+    jib VARCHAR(255) UNIQUE NOT NULL,
+    pdv VARCHAR(255) NOT NULL,
+    broj_telefona VARCHAR(255) NOT NULL,
+    kontakt_osoba VARCHAR(255) NOT NULL,
+    email_adresa VARCHAR(255) NOT NULL,
+    datum_pocetka DATE NOT NULL,
+    datum_zavrsetka DATE
+);
+
+insert into dobavljaci(naziv, jib, pdv, broj_telefona, kontakt_osoba, email_adresa, datum_pocetka, datum_zavrsetka)
+values('Željezara', '12843940', '20%', '062 456 493', 'Mujo Mujić', 'Željezara@mail.com', '2023-12-01', '2023-12-05');
+
+insert into dobavljaci(naziv, jib, pdv, broj_telefona, kontakt_osoba, email_adresa, datum_pocetka, datum_zavrsetka)
+values('Pilana', '12880940', '25%', '062 496 493', 'Suljo Suljić', 'Pilana@mail.com', '2023-12-01', '2023-12-05');
+
+CREATE TABLE sirovine (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naziv VARCHAR(255) NOT NULL,
+    kolicina INT NOT NULL,
+    min_kolicina INT NOT NULL,
+    cijena DECIMAL(10, 2) NOT NULL,
+    jedinica_mjere VARCHAR(255) NOT NULL,
+    da_li_se_koristi BOOLEAN NOT NULL,
+    dobavljaci_id INT,
+    FOREIGN KEY (dobavljaci_id) REFERENCES dobavljaci(id)
+);
+
+insert into sirovine(naziv, kolicina, min_kolicina, cijena, jedinica_mjere, da_li_se_koristi, dobavljaci_id)
+values('Željezo', '1000', '100', '20', 'kg', true , '1');
+
+insert into sirovine(naziv, kolicina, min_kolicina, cijena, jedinica_mjere, da_li_se_koristi, dobavljaci_id)
+values('Drvo', '1000', '100', '10', 'kg', true , '2');
+
+
+
+CREATE TABLE proizvodi_proces_stavka (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    sirovine_id INT NOT NULL,
+    proizvodni_procesi_id INT NOT NULL,
+    kolicina INT NOT NULL,
+    FOREIGN KEY (sirovine_id) REFERENCES sirovine(id),
+    FOREIGN KEY (proizvodni_procesi_id) REFERENCES proizvodni_procesi(id)
+);
+
+CREATE TABLE proizvodni_procesi (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naziv VARCHAR(255) NOT NULL,
+    datum_pocetka DATE NOT NULL,
+    datum_zavrsetka DATE
+);
+
+insert into proizvodni_procesi(naziv, datum_pocetka, datum_zavrsetka)
+values('Proizvodnja drvenih daski', '2023-12-01', '2023-12-02');
+
+insert into proizvodni_procesi(naziv, datum_pocetka, datum_zavrsetka)
+values('Proizvodnja čeličnih cijevi', '2023-12-01', '2023-12-02');
+
+insert into proizvodni_procesi(naziv, datum_pocetka, datum_zavrsetka)
+values('Proizvodnja željeznih eksera', '2023-12-01', '2023-12-02');
+
+insert into proizvodni_procesi(naziv, datum_pocetka, datum_zavrsetka)
+values('Proizvodnja željeznih šarafa', '2023-12-01', '2023-12-02');
+
+CREATE TABLE proizvodi (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naziv VARCHAR(255) NOT NULL,
+    slika_proizvoda VARCHAR(255) NOT NULL,
+    proizvodni_procesi_id INT,
+    marza DECIMAL(10, 2) NOT NULL,
+    cijena DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (proizvodni_procesi_id) REFERENCES proizvodni_procesi(id)
+);
+
+
+insert into proizvodi(naziv, slika_proizvoda, proizvodni_procesi_id, marza, cijena)
+values('Drvena daska', 'https://img.freepik.com/premium-photo/stack-wooden-construction-planks-timber-planks_241146-639.jpg?w=2000', '1', '30', '60');
+
+
+insert into proizvodi(naziv, slika_proizvoda, proizvodni_procesi_id, marza, cijena)
+values('Čelična cijev', 'https://thumbs.dreamstime.com/b/steel-pipe-silvery-closeup-white-background-38594611.jpg', '2', '30', '70');
+
+
+insert into proizvodi(naziv, slika_proizvoda, proizvodni_procesi_id, marza, cijena)
+values('Ekseri', 'https://adazal.ba/assets/photos/product/original/1598621799-ekseri-22.jpg', '3', '0.2', '0.5');
+
+
+insert into proizvodi(naziv, slika_proizvoda, proizvodni_procesi_id, marza, cijena)
+values('Šarafi', 'https://goodsoundmusic.net/wp-content/uploads/2017/01/GEWA-570.747.jpg', '4', '0.3', '0.6');
