@@ -1,0 +1,26 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-expand-lg" style="background-color: darkslategray">
+    <a class="navbar-brand" style="color:white; font-weight: bold; padding-left: 1cm;">Građevina | </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+       <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <button style="padding-left: 29cm; border: none; background-color: darkslategray; color:white; font-weight: bold;"><a (click)="signupAction()">Signup</a></button>
+            <button style="padding-left: 29cm; border: none; background-color: darkslategray; color:white; font-weight: bold;"><a>Login</a></button>
+          </li>
+       </ul>
+       <form class="form-inline">
+       </form>
+    </div>
+  </nav>
+
+
+<div class="btn-grupa">
+    <button style="margin-top: 0.1cm;" routerLink="/gradjevina/proizvodi">Proizvodi</button>
+    <button routerLink="/gradjevina/sirovine">Sirovine</button>
+    <button routerLink="/gradjevina/proizvodni_procesi">Proizvodni procesi</button>
+    <button routerLink="/gradjevina/dobavljaci">Dobavljači</button>
+</div>

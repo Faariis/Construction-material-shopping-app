@@ -1,0 +1,33 @@
+
+
+<form style="width: 40%;" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="ime">Ime</label>
+      <input type="text" class="form-control" id="ime" [(ngModel)]="korisnik.ime" name="ime" required>
+    </div>
+    <div class="form-group">
+      <label for="prezime">Prezime</label>
+      <input type="text" class="form-control" id="prezime" [(ngModel)]="korisnik.prezime" name="prezime" required>
+    </div>
+    <div class="form-group">
+      <label for="email_adresa">Email adresa</label>
+      <input type="email" class="form-control" id="email_adresa" [(ngModel)]="korisnik.email_adresa" name="email_adresa" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="korisnik.password" name="password" required>
+    </div>
+    <div class="form-group">
+      <label for="uloga">Uloga</label>
+      <input type="text" class="form-control" id="uloga" [(ngModel)]="korisnik.uloga" name="uloga" required>
+    </div>
+    <div class="form-group">
+      <label for="broj_telefona">Broj telefona</label>
+      <input type="text" class="form-control" id="broj_telefona" [(ngModel)]="korisnik.broj_telefona" name="broj_telefona" required>
+    </div>
+    <div class="form-group">
+      <label for="adresa">Adresa</label>
+      <input type="text" class="form-control" id="adresa" [(ngModel)]="korisnik.adresa" name="adresa" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>

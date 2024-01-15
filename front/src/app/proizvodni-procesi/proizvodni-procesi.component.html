@@ -1,0 +1,140 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<nav class="navbar navbar-expand-lg" style="background-color: darkslategray">
+  <a class="navbar-brand" style="color:white; font-weight: bold; padding-left: 1cm;">Proizvodni procesi</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+     <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+
+        </li>
+     </ul>
+     <form class="form-inline">
+        <input type="search" (ngModelChange)="searchProizvodniProcesi(key.value)" #key="ngModel" ngModel
+         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Pronađi proces" required>
+     </form>
+  </div>
+</nav>
+
+<button style="width: 100%; text-align: center; border: 10px; padding-top: 0.2cm; padding-bottom: 0.2cm; background-color: green; color: white; font-weight: bold;" class="nav-link" (click)="onOpenModal4(null, 'add')">Pokreni novi proces!<span class="sr-only">(current)</span></button>
+
+
+
+
+<div class="container" id="main4-container" style="padding-top: 0.2cm;">
+    <div class="row">
+        <div *ngFor="let proizvodni_proces of proizvodni_procesi" class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h6 style="font-size: small;">{{proizvodni_proces?.naziv}}</h6>
+                    </div>
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Id: {{proizvodni_proces?.id}}</li>
+                    <li class="list-group-item">Početak: {{proizvodni_proces?.datum_pocetka}}</li>
+                    <li class="list-group-item">Kraj: {{proizvodni_proces?.datum_zavrsetka}}</li>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a style="background-color: gray; width: 110px; color: black; margin-bottom: 10px; border: none; font-weight: bold;"  (click)="onOpenModal4(proizvodni_proces, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit">Izmijeni</a>
+                        <a style="background-color: red; width: 110px; color: white; margin-bottom: 10px; font-weight: bold;"(click)="onOpenModal4(proizvodni_proces, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete">Izbriši</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addProizvodniProcesModal" tabindex="-1" role="dialog" aria-labelledby="addProizvodniProcesModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="modal-title" id="addProizvodniProcesModalLabel">Dodaj proizvod</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+       <div class="modal-body">
+          <form #addForm="ngForm" (ngSubmit)="onAddProizvodniProcesi(addForm)">
+          <div class="form-group">
+             <label for="naziv">Naziv</label>
+             <input type="text" ngModel name="naziv" class="form-control" id="naziv" placeholder="naziv" required>
+          </div>
+          <div class="form-group">
+             <label for="datum_pocetka">Početak</label>
+             <input type="date" ngModel name="datum_pocetka" class="form-control" id="datum_pocetka" placeholder="početak" required>
+          </div>
+          <div class="form-group">
+             <label for="datum_zavrsetka">Kraj</label>
+             <input type="date" ngModel name="datum_zavrsetka" class="form-control" id="datum_zavrsetka" placeholder="kraj" required>
+          </div>
+          <div class="modal-footer">
+             <button type="button" id="add-proizvodni-proces-form" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" style="border: none; background-color: green;">Sačuvaj</button>
+          </div>
+          </form>
+       </div>
+    </div>
+  </div>
+  </div>
+
+
+<div class="modal fade" id="updateProizvodniProcesModal" tabindex="-1" role="dialog" aria-labelledby="proizvodniProcesEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateProizvodniProcesModalLabel">Izmijeni {{updateProizvodni_procesi?.naziv}}</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #updateForm="ngForm">
+              <div class="form-group">
+                 <label for="naziv">Naziv</label>
+                 <input type="text" ngModel="{{updateProizvodni_procesi?.naziv}}" name="naziv" class="form-control" id="naziv" aria-describedby="emailHelp" placeholder="naziv">
+              </div>
+              <div class="form-group">
+                <label for="datum_pocetka">Početak</label>
+                <input type="date" ngModel="{{updateProizvodni_procesi?.datum_pocetka}}" name="datum_pocetka" class="form-control" id="datum_pocetka" placeholder="početak">
+             </div>
+              <div class="form-group">
+                 <label for="datum_zavrsetka">Kraj</label>
+                 <input type="date" ngModel="{{updateProizvodni_procesi?.datum_zavrsetka}}" name="datum_zavrsetka" class="form-control" id="datum_zavrsetka" placeholder="kraj">
+              </div>
+              <input type="hidden" ngModel="{{updateProizvodni_procesi?.id}}" name="id" class="form-control" id="id" placeholder="id">
+              <div class="modal-footer">
+                 <button type="button" id="update-proizvodni-procesi-modal" data-dismiss="modal" class="btn btn-secondary">Zatvori</button>
+                 <button (click)="onUpdateProizvodniProcesi(updateForm.value)" data-dismiss="modal" class="btn btn-primary" style="border: none; background-color: green;">Sačuvaj</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+<!--
+
+<div class="modal fade" id="deleteProizvodModal" tabindex="-1" role="dialog" aria-labelledby="deleteProizvodLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteProizvodLabel">Izbriši proizvod</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Da li ste sigurni da želite izbirisati {{deleteProizvod?.naziv}}?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Ne</button>
+              <button (click)="onDeleteProizvod(deleteProizvod?.id)" class="btn btn-danger" data-dismiss="modal">Da</button>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+-->

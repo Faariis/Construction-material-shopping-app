@@ -1,0 +1,163 @@
+<router-outlet></router-outlet>
+<!--
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<nav class="navbar navbar-expand-lg" style="background-color: darkslategray">
+  <a class="navbar-brand" style="color:white; font-weight: bold;">Avanture.com</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+     <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+
+        </li>
+     </ul>
+     <form class="form-inline">
+        <input type="search" (ngModelChange)="searchDogadjaj(key.value)" #key="ngModel" ngModel 
+         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Pronađi avanturu" required>
+     </form>
+  </div>
+</nav>
+
+<a style="text-align: center; border: 10px; background-color: green; color: white; font-weight: bold;" class="nav-link" (click)="onOpenModal(null, 'add')">Dodaj događaj!<span class="sr-only">(current)</span></a>
+
+<div class="container" id="main-container">
+    <div class="row">
+        <div *ngFor="let proizvod of proizvodi" class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                
+            
+               <a href=""><img id="slika" src="{{proizvod?.slika_proizvoda}}" class="img-fluid"></a>
+                
+
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h6>{{proizvod?.naziv}}</h6>
+                    </div>
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Lokacija: {{proizvod?.marza}}</li>
+                    <li class="list-group-item">Opis: {{proizvod?.cijena}}</li>
+                    <li class="list-group-item">Datum: {{proizvod?.proizvodni_procesi_naziv}}</li>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a style="background-color: gray; width: 110px; color: black; margin-bottom: 10px; border: none; font-weight: bold;"  (click)="onOpenModal(proizvod, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit">Izmjeni</a>
+                        <a style="background-color: red; width: 110px; color: white; margin-bottom: 10px; font-weight: bold;"(click)="onOpenModal(proizvod, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete">Izbriši</a> 
+                    </div>
+                    <ul class="komentar" style="width: 150px;">
+                      <input type="text" ngModel name="komentar" class="form-control" id="komentar" placeholder="komentar">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addDogadjajModal" tabindex="-1" role="dialog" aria-labelledby="addDogadjajModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="modal-title" id="addDogadjajaModalLabel">Dodaj avanturu</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+       <div class="modal-body">
+          <form #addForm="ngForm" (ngSubmit)="onAddDogadjaj(addForm)">
+          <div class="form-group">
+             <label for="naziv">Naziv</label>
+             <input type="text" ngModel name="naziv" class="form-control" id="naziv" placeholder="naziv" required>
+          </div>
+          <div class="form-group">
+             <label for="lokacija">Lokacija</label>
+             <input type="text" ngModel name="lokacija" class="form-control" id="lokacija" placeholder="lokacija" required>
+          </div>
+          <div class="form-group">
+             <label for="opis">Opis</label>
+             <input type="text" ngModel name="opis" class="form-control" id="opis" placeholder="opis" required>
+          </div>
+          <div class="form-group">
+             <label for="datumOdrzavanja">Datum Odrzavanja</label>
+             <input type="date" ngModel name="datumOdrzavanja" class="form-control" id="datumOdrzavanja" placeholder="Datum odrzavanja" required>
+          </div>
+          <div class="form-group">
+             <label for="imageUrl">Image URL</label>
+             <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="image URL" required>
+          </div>
+          <div class="modal-footer">
+             <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" style="border: none; background-color: green;">Sačuvaj</button>
+          </div>
+          </form>
+       </div>
+    </div>
+  </div>
+  </div>
+
+
+<div class="modal fade" id="updateDogadjajModal" tabindex="-1" role="dialog" aria-labelledby="dogadjajEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateDogadjajModalLabel">Izmjeni {{editDogadjaj?.naziv}}</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+              <div class="form-group">
+                 <label for="name">Naziv</label>
+                 <input type="text" ngModel="{{editDogadjaj?.naziv}}" name="naziv" class="form-control" id="naziv" aria-describedby="emailHelp" placeholder="naziv">
+              </div>
+              <input type="hidden" ngModel="{{editDogadjaj?.id}}" name="id" class="form-control" id="id" placeholder="Email">
+              <input type="hidden" ngModel="{{editDogadjaj?.kodDogadjaja}}" name="userCode" class="form-control" id="userCode" placeholder="Email">
+              <div class="form-group">
+                 <label for="email">Lokacija</label>
+                 <input type="email" ngModel="{{editDogadjaj?.lokacija}}" name="lokacija" class="form-control" id="lokacija" placeholder="lokacija">
+              </div>
+              <div class="form-group">
+                 <label for="phone">Opis</label>
+                 <input type="text" ngModel="{{editDogadjaj?.opis}}" name="opis" class="form-control" id="opis" placeholder="opis">
+              </div>
+              <div class="form-group">
+                 <label for="phone">Datum Održavanja</label>
+                 <input type="date" ngModel="{{editDogadjaj?.datumOdrzavanja}}" name="datumOdrzavanja" class="form-control" id="datumOdrzavanja" name="datumOdrzavanja" placeholder="datumOdrzavanja">
+              </div>
+              <div class="form-group">
+                 <label for="phone">Image URL</label>
+                 <input type="text" ngModel="{{editDogadjaj?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="image URL">
+              </div>
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button (click)="onUpdateDogadjaj(editForm.value)" data-dismiss="modal" class="btn btn-primary" style="border: none; background-color: green;">Save changes</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="deleteDogadjajModal" tabindex="-1" role="dialog" aria-labelledby="deleteDogadjajLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteDogadjajLabel">Izbriši događaj</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Da li ste sigurni da želite izbirisati {{deleteDogadjaj?.naziv}}?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Ne</button>
+              <button (click)="onDeleteDogadjaj(deleteDogadjaj?.id)" class="btn btn-danger" data-dismiss="modal">Da</button>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+-->
