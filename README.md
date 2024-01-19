@@ -10,6 +10,15 @@ The final stages involved linking the backend with the frontend, configuring Ang
 ### Running the Project
 After opening the project, execute 'npm install' in the terminal. Once dependencies are installed, run 'npm start' for Node and 'ng serve' for Angular. Find the database script in the folder and refer to the .env file for configuration details.
 
+### Images
+
+![Screenshot (211)](https://github.com/Faariis/Construction-material-shopping-app/assets/84626163/65c25d8d-9e1b-4b76-9054-62a8c99d6809)
+![Screenshot (215)](https://github.com/Faariis/Construction-material-shopping-app/assets/84626163/9fe733f3-5866-4d3f-9e08-981020e516c3)
+![Screenshot (221)](https://github.com/Faariis/Construction-material-shopping-app/assets/84626163/27f20625-3c6e-4856-ac03-1c93b857bcb9)
+![Screenshot (227)](https://github.com/Faariis/Construction-material-shopping-app/assets/84626163/aa956984-6e20-4643-a958-3f086f2e6622)
+![Screenshot (238)](https://github.com/Faariis/Construction-material-shopping-app/assets/84626163/1bcbbe13-8c3f-4b61-b1e2-f1b7a3c6d001)
+
+
 
 
 
